@@ -1,67 +1,150 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.ColumnConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.navios.controller.MainController">
+<BorderPane prefHeight="600.0" prefWidth="900.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.navios.controller.MainController">
    <left>
-      <VBox fx:id="sidebar" prefHeight="600.0" prefWidth="160.0" spacing="0.0" style="-fx-background-color: #2c3e50;" BorderPane.alignment="CENTER">
-         <children>
-            <!-- Botão hamburger sempre visível -->
-            <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#handleToggleMenu" text="☰"
-                    style="-fx-font-size: 20px; -fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand; -fx-alignment: CENTER-LEFT;"
-                    maxWidth="Infinity">
-               <padding>
-                  <Insets bottom="14.0" left="15.0" right="15.0" top="14.0" />
-               </padding>
-            </Button>
+      <VBox fx:id="sidebar" prefHeight="600.0" prefWidth="160.0" spacing="0.0"
+         style="-fx-background-color: #2c3e50;"
+         BorderPane.alignment="CENTER">
+      <children>
 
-            <!-- Botões de navegação (colapsáveis) -->
+         <!-- SUBSTITUI o Button antigo por isto -->
+         <HBox alignment="CENTER_LEFT" spacing="8.0" maxWidth="Infinity"
+               style="-fx-background-color: #243342;">
+            <padding><Insets bottom="14.0" left="15.0" right="15.0" top="14.0" /></padding>
+            <children>
+               <Button fx:id="btnMenu" mnemonicParsing="false" onAction="#handleToggleMenu" text="☰"
+                     style="-fx-font-size: 20px; -fx-background-color: transparent; -fx-text-fill: white; -fx-cursor: hand;"
+                     minWidth="24.0" />
+               <Label fx:id="lblNomeApp" text="Ola"
+                     style="-fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white; -fx-font-family: 'Segoe UI';" />
+            </children>
+         </HBox>
+
             <VBox fx:id="navButtons" spacing="0.0">
                <children>
                   <Separator style="-fx-opacity: 0.3;" />
-
+                  <Button fx:id="btnInicio" mnemonicParsing="false" onAction="#handleInicio" text="🏠  Início"
+                          style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-font-size: 13px; -fx-alignment: CENTER-LEFT; -fx-cursor: hand;"
+                          maxWidth="Infinity">
+                     <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>
+                  </Button>
                   <Button fx:id="btnNavios" mnemonicParsing="false" onAction="#handleNavios" text="⚓  Navios"
                           style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-font-size: 13px; -fx-alignment: CENTER-LEFT; -fx-cursor: hand;"
                           maxWidth="Infinity">
-                     <padding>
-                        <Insets bottom="14.0" left="20.0" right="40.0" top="14.0" />
-                     </padding>
+                     <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>
                   </Button>
-
                   <Button fx:id="btnViagens" mnemonicParsing="false" onAction="#handleViagens" text="🚢  Viagens"
                           style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-font-size: 13px; -fx-alignment: CENTER-LEFT; -fx-cursor: hand;"
                           maxWidth="Infinity">
-                     <padding>
-                        <Insets bottom="14.0" left="20.0" right="40.0" top="14.0" />
-                     </padding>
+                     <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>
                   </Button>
-
                   <Button fx:id="btnCargas" mnemonicParsing="false" onAction="#handleCargas" text="📦  Cargas"
                           style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-font-size: 13px; -fx-alignment: CENTER-LEFT; -fx-cursor: hand;"
                           maxWidth="Infinity">
-                     <padding>
-                        <Insets bottom="14.0" left="20.0" right="40.0" top="14.0" />
-                     </padding>
+                     <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>
                   </Button>
-
                   <Button fx:id="btnTripulacao" mnemonicParsing="false" onAction="#handleTripulacao" text="👥  Tripulação"
                           style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-font-size: 13px; -fx-alignment: CENTER-LEFT; -fx-cursor: hand;"
                           maxWidth="Infinity">
-                     <padding>
-                        <Insets bottom="14.0" left="20.0" right="40.0" top="14.0" />
-                     </padding>
+                     <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>
                   </Button>
                </children>
             </VBox>
          </children>
       </VBox>
    </left>
+
    <center>
-      <AnchorPane fx:id="mainContent" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="mainContent" BorderPane.alignment="CENTER">
+         <children>
+
+            <VBox fx:id="dashboardView" spacing="6.0"
+                  AnchorPane.leftAnchor="0.0"
+                  AnchorPane.rightAnchor="0.0"
+                  AnchorPane.topAnchor="0.0"
+                  AnchorPane.bottomAnchor="0.0">
+               <padding><Insets bottom="40.0" left="40.0" right="40.0" top="40.0" /></padding>
+               <children>
+
+                  <Label text="Gestão de Navios Petroleiros"
+                         style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+                  <Label text="Seleciona uma secção no menu para começar."
+                         style="-fx-font-size: 13px; -fx-text-fill: #7f8c8d;" />
+
+                  <GridPane hgap="16.0" vgap="16.0" style="-fx-padding: 20 0 0 0;">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                        <ColumnConstraints hgrow="ALWAYS" percentWidth="25.0" />
+                     </columnConstraints>
+                     <children>
+
+                        <VBox GridPane.columnIndex="0" spacing="8.0" alignment="CENTER"
+                              style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6;">
+                           <padding><Insets bottom="20.0" left="16.0" right="16.0" top="20.0" /></padding>
+                           <children>
+                              <Label text="⚓" style="-fx-font-size: 28px;" />
+                              <Label fx:id="lblTotalNavios" text="—"
+                                     style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e4a6b;" />
+                              <Label text="Navios" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                           </children>
+                        </VBox>
+
+                        <VBox GridPane.columnIndex="1" spacing="8.0" alignment="CENTER"
+                              style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6;">
+                           <padding><Insets bottom="20.0" left="16.0" right="16.0" top="20.0" /></padding>
+                           <children>
+                              <Label text="🚢" style="-fx-font-size: 28px;" />
+                              <Label fx:id="lblTotalViagens" text="—"
+                                     style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e4a6b;" />
+                              <Label text="Viagens" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                           </children>
+                        </VBox>
+
+                        <VBox GridPane.columnIndex="2" spacing="8.0" alignment="CENTER"
+                              style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6;">
+                           <padding><Insets bottom="20.0" left="16.0" right="16.0" top="20.0" /></padding>
+                           <children>
+                              <Label text="📦" style="-fx-font-size: 28px;" />
+                              <Label fx:id="lblTotalCargas" text="—"
+                                     style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e4a6b;" />
+                              <Label text="Cargas" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                           </children>
+                        </VBox>
+
+                        <VBox GridPane.columnIndex="3" spacing="8.0" alignment="CENTER"
+                              style="-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-width: 1; -fx-border-radius: 6; -fx-background-radius: 6;">
+                           <padding><Insets bottom="20.0" left="16.0" right="16.0" top="20.0" /></padding>
+                           <children>
+                              <Label text="👥" style="-fx-font-size: 28px;" />
+                              <Label fx:id="lblTotalTripulacao" text="—"
+                                     style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2e4a6b;" />
+                              <Label text="Tripulação" style="-fx-font-size: 12px; -fx-text-fill: #7f8c8d;" />
+                           </children>
+                        </VBox>
+
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+
+         </children>
+      </AnchorPane>
    </center>
 </BorderPane>

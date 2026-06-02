@@ -1,1 +1,4 @@
 com\navios\App.class
+com\navios\controller\CargasController.class
+com\navios\controller\MainController.class
+com\navios\controller\NavioController.class

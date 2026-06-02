@@ -3,17 +3,53 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 
+<AnchorPane prefHeight="489.0" prefWidth="768.0"
+            xmlns="http://javafx.com/javafx/17"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.navios.controller.NavioController">
+    <children>
 
-<AnchorPane xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.navios.controller.NavioController">
-   <children>
-      <TableView fx:id="tabelaNavios" AnchorPane.topAnchor="78.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <Button fx:id="btnAdicionarNavio" layoutX="10.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleAdicionarNavio" text="Adicionar Navio" />
-   </children>
+        <HBox alignment="CENTER_LEFT" spacing="10.0"
+              AnchorPane.leftAnchor="24.0"
+              AnchorPane.rightAnchor="24.0"
+              AnchorPane.topAnchor="16.0">
+            <children>
+                <TextField fx:id="txtPesquisa"
+                           prefHeight="30.0" prefWidth="240.0"
+                           promptText="Pesquisar navio..."
+                           onAction="#handleSearchNavio" />
+                <Button fx:id="btnSearchNavio"
+                        text="Pesquisar"
+                        prefHeight="30.0"
+                        mnemonicParsing="false"
+                        onAction="#handleSearchNavio" />
+                <Region HBox.hgrow="ALWAYS" />
+                <Button fx:id="btnAdicionarNavio"
+                        text="Adicionar Navio"
+                        prefHeight="30.0"
+                        mnemonicParsing="false"
+                        onAction="#handleAdicionarNavio"
+                        style="-fx-background-color: #2e4a6b; -fx-text-fill: white; -fx-background-radius: 4;" />
+            </children>
+        </HBox>
+
+        <TableView fx:id="tabelaNavios"
+                   AnchorPane.leftAnchor="24.0"
+                   AnchorPane.rightAnchor="24.0"
+                   AnchorPane.topAnchor="58.0"
+                   AnchorPane.bottomAnchor="16.0">
+            <columns>
+                <TableColumn fx:id="colNomeNavio"  text="Nome do Navio"   prefWidth="200.0" />
+                <TableColumn fx:id="colTipoNavio"  text="Tipo de Navio"   prefWidth="150.0" />
+                <TableColumn fx:id="colEstado"     text="Estado"          prefWidth="150.0" />
+                <TableColumn fx:id="colObservacoes" text="Observações"    prefWidth="220.0" />
+            </columns>
+        </TableView>
+
+    </children>
 </AnchorPane>
