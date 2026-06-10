@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+
+<StackPane xmlns="http://javafx.com/javafx/17"
+           xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="com.navios.controller.AdicionarNavioController"
+           style="-fx-background-color: rgba(0,0,0,0.45);">
+
+    <!-- Modal Card -->
+    <VBox
+          prefWidth="500"
+          maxHeight="680"
+          spacing="0"
+          style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 24, 0, 0, 8);">
+
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT"
+              spacing="12"
+              style="-fx-background-color: #1E2433; -fx-background-radius: 12 12 0 0; -fx-padding: 18 20 18 24;">
+            <Label text="⚓" style="-fx-text-fill: #6B8CFF; -fx-font-size: 18px;"/>
+            <Label text="Adicionar Uma Nova Tripulação"
+                   style="-fx-text-fill: #FFFFFF; -fx-font-size: 16px; -fx-font-weight: bold;"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="✕"
+                    onAction="#handleFecharModal"
+                    style="-fx-background-color: transparent; -fx-text-fill: #8A93A8; -fx-font-size: 16px; -fx-cursor: hand; -fx-padding: 2 8 2 8; -fx-background-radius: 6;"/>
+        </HBox>
+
+        <!-- Divider -->
+        <Rectangle height="1" fill="#E8ECF2">
+            <VBox.margin>
+                <Insets/>
+            </VBox.margin>
+        </Rectangle>
+
+        <!-- Scrollable Body -->
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
+                    style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;"
+                    VBox.vgrow="ALWAYS">
+
+            <VBox spacing="18" style="-fx-background-color: #FFFFFF;">
+                <padding>
+                    <Insets top="24" right="24" bottom="8" left="24"/>
+                </padding>
+
+                <!-- Nome -->
+                <VBox spacing="6">
+                    <Label text="Nome do Navio"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <TextField fx:id="nomeNavioField"
+                               promptText="Ex: NP Lusitânia"
+                               style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px; -fx-text-fill: #1E2433;"/>
+                    <Label text="* Obrigatório"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9CA3AF; -fx-padding: 0 0 0 2;"/>
+                </VBox>
+
+                <!-- Tipo -->
+                <VBox spacing="6">
+                    <Label text="Tipo de Navio"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <ComboBox fx:id="tipoNavioCombo"
+                              promptText="Selecionar tipo..."
+                              maxWidth="Infinity"
+                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Petroleiro VLCC"/>
+                                <String fx:value="Petroleiro ULCC"/>
+                                <String fx:value="Petroleiro Suezmax"/>
+                                <String fx:value="Petroleiro Aframax"/>
+                                <String fx:value="Petroleiro Panamax"/>
+                                <String fx:value="Navio Tanque"/>
+                                <String fx:value="Navio de Apoio"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label text="* Obrigatório"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9CA3AF; -fx-padding: 0 0 0 2;"/>
+                </VBox>
+
+                <!-- Estado -->
+                <VBox spacing="6">
+                    <Label text="Estado"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <ComboBox fx:id="estadoCombo"
+                              promptText="Selecionar estado..."
+                              maxWidth="Infinity"
+                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                                <String fx:value="Operacional"/>
+                                <String fx:value="Em Manutenção"/>
+                                <String fx:value="Fora de Serviço"/>
+                                <String fx:value="Em Rota"/>
+                                <String fx:value="Ancorado"/>
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
+                    <Label text="* Obrigatório"
+                           style="-fx-font-size: 11px; -fx-text-fill: #9CA3AF; -fx-padding: 0 0 0 2;"/>
+                </VBox>
+
+                <!-- Capacidade + Ano (side by side) -->
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Capacidade (toneladas)"
+                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                        <TextField fx:id="capacidadeField"
+                                   promptText="Ex: 300 000"
+                                   style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px; -fx-text-fill: #1E2433;"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Ano de Construção"
+                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                        <TextField fx:id="anoField"
+                                   promptText="Ex: 2018"
+                                   style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px; -fx-text-fill: #1E2433;"/>
+                    </VBox>
+                </HBox>
+
+                <!-- Observações -->
+                <VBox spacing="6">
+                    <Label text="Observações"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <TextArea fx:id="observacoesArea"
+                              promptText="Informações adicionais sobre o navio..."
+                              prefHeight="100"
+                              wrapText="true"
+                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px; -fx-text-fill: #1E2433;"/>
+                </VBox>
+
+                <!-- ─── NEW FIELDS ─────────────────────────────────────── -->
+
+                <!-- Nomeador (text) -->
+                <VBox spacing="6">
+                    <Label text="Nomeador"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <TextField fx:id="nomeadorField"
+                               promptText="Ex: Armador / Operador"
+                               style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px; -fx-text-fill: #1E2433;"/>
+                </VBox>
+
+                <!-- Gebrião — Data (DatePicker) -->
+                <VBox spacing="6">
+                    <Label text="Gebrião"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <DatePicker fx:id="gebriaoDatePicker"
+                                promptText="dd/mm/aaaa"
+                                maxWidth="Infinity"
+                                style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
+                </VBox>
+
+                <!-- N° Compartimentos (Spinner — numeric) -->
+                <VBox spacing="6">
+                    <Label text="N° Compartimentos"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <Spinner fx:id="compartimentosSpinner"
+                             min="0"
+                             max="999"
+                             initialValue="0"
+                             editable="true"
+                             maxWidth="Infinity"
+                             style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
+                </VBox>
+
+                <!-- Bordoinar (text + ComboBox) -->
+                <VBox spacing="6">
+                    <Label text="Bordoinar"
+                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                    <HBox spacing="10">
+                        <TextField fx:id="bordoinarTextField"
+                                   promptText="Descrição..."
+                                   HBox.hgrow="ALWAYS"
+                                   style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px; -fx-text-fill: #1E2433;"/>
+                        <ComboBox fx:id="bordoinarCombo"
+                                  promptText="Selecionar..."
+                                  prefWidth="160"
+                                  style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Estibordo"/>
+                                    <String fx:value="Bombordo"/>
+                                    <String fx:value="Ambos"/>
+                                    <String fx:value="Não Aplicável"/>
+                                </FXCollections>
+                            </items>
+                        </ComboBox>
+                    </HBox>
+                </VBox>
+
+                <!-- ─── END NEW FIELDS ────────────────────────────────── -->
+
+                <!-- Erro Label -->
+                <Label fx:id="erroLabel"
+                       text=""
+                       wrapText="true"
+                       visible="false"
+                       managed="false"
+                       style="-fx-background-color: #FEF2F2; -fx-text-fill: #DC2626; -fx-font-size: 13px; -fx-padding: 10 14 10 14; -fx-background-radius: 8; -fx-border-color: #FECACA; -fx-border-radius: 8;"/>
+
+            </VBox>
+        </ScrollPane>
+
+        <!-- Divider -->
+        <Rectangle height="1" fill="#E8ECF2"/>
+
+        <!-- Footer -->
+        <HBox alignment="CENTER_RIGHT"
+              spacing="12"
+              style="-fx-background-color: #F8F9FB; -fx-background-radius: 0 0 12 12; -fx-padding: 16 24 20 24;">
+
+            <Button text="Cancelar"
+                    onAction="#handleFecharModal"
+                    style="-fx-background-color: #FFFFFF; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #374151; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+
+            <Button text="  Guardar Navio  "
+                    defaultButton="true"
+                    onAction="#handleGuardarNavio"
+                    style="-fx-background-color: #1E2433; -fx-background-radius: 8; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 24 10 24; -fx-cursor: hand; -fx-border-color: transparent;"/>
+
+        </HBox>
+
+    </VBox>
+
+</StackPane>

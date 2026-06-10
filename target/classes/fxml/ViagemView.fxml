@@ -30,7 +30,7 @@
                         onAction="#handleSearchViagem" />
                 <Region HBox.hgrow="ALWAYS" />
                 <Button fx:id="btnAdicionarViagem"
-                        text="Adicionar Viagem"
+                        text="Adicionar Viagem" 
                         prefHeight="30.0"
                         mnemonicParsing="false"
                         onAction="#handleAdicionarViagem"

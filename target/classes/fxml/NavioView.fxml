@@ -44,10 +44,12 @@
                    AnchorPane.topAnchor="58.0"
                    AnchorPane.bottomAnchor="16.0">
             <columns>
-                <TableColumn fx:id="colNomeNavio"  text="Nome do Navio"   prefWidth="200.0" />
-                <TableColumn fx:id="colTipoNavio"  text="Tipo de Navio"   prefWidth="150.0" />
-                <TableColumn fx:id="colEstado"     text="Estado"          prefWidth="150.0" />
-                <TableColumn fx:id="colObservacoes" text="Observações"    prefWidth="220.0" />
+                <TableColumn fx:id="colId"      text="ID" />
+                <TableColumn fx:id="colNome"    text="Nome" />
+                <TableColumn fx:id="colIMO"     text="IMO" />
+                <TableColumn fx:id="colBandeira" text="Bandeira" />
+                <TableColumn fx:id="colAno"     text="Ano Fabrico" />
+                <TableColumn fx:id="colEstado"  text="Estado" />
             </columns>
         </TableView>
 
