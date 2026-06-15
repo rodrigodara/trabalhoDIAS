@@ -2,16 +2,17 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane prefHeight="440.0" prefWidth="400.0"
+<AnchorPane prefHeight="420.0" prefWidth="400.0"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.navios.controller.AdicionarCargasController">
+            fx:controller="com.navios.controller.AdicionarTripulanteController">
     <children>
         <VBox spacing="12.0"
               AnchorPane.leftAnchor="24.0"
@@ -19,23 +20,20 @@
               AnchorPane.topAnchor="24.0"
               AnchorPane.bottomAnchor="24.0">
 
-            <Label text="Designação" />
-            <TextField fx:id="txtDesignacao" promptText="Ex: Contentores de aço" />
+            <Label text="Nome" />
+            <TextField fx:id="txtNome" promptText="Ex: João" />
 
-            <Label text="Tipo de Carga" />
-            <ComboBox fx:id="tipoCombo" prefWidth="Infinity" />
+            <Label text="Sobrenome" />
+            <TextField fx:id="txtSobrenome" promptText="Ex: Silva" />
 
-            <Label text="Volume (m³)" />
-            <TextField fx:id="txtVolume" promptText="Ex: 12.5" />
+            <Label text="Estado de Disponibilidade" />
+            <ComboBox fx:id="estadoCombo" prefWidth="Infinity" />
 
-            <Label text="Peso (kg)" />
-            <TextField fx:id="txtPeso" promptText="Ex: 5000.0" />
+            <Label text="Nacionalidade" />
+            <TextField fx:id="txtNacionalidade" promptText="Ex: Portuguesa" />
 
-            <Label text="Porto de Carga" />
-            <ComboBox fx:id="portoCargaCombo" prefWidth="Infinity" />
-
-            <Label text="Porto de Descarga" />
-            <ComboBox fx:id="portoDescargaCombo" prefWidth="Infinity" />
+            <Label text="Data de Nascimento" />
+            <DatePicker fx:id="dataNascimentoPicker" prefWidth="Infinity" />
 
             <Label fx:id="erroLabel" textFill="red" visible="false" managed="false" />
 
@@ -47,7 +45,7 @@
                 <Button text="Guardar"
                         prefWidth="170.0"
                         mnemonicParsing="false"
-                        onAction="#handleGuardarCarga"
+                        onAction="#handleGuardarTripulante"
                         style="-fx-background-color: #2e4a6b; -fx-text-fill: white; -fx-background-radius: 4;" />
             </HBox>
 

@@ -3,7 +3,7 @@
 ============================================================ */
 
 CREATE TABLE Tipo_Navio(
-    ID_Tipo_Navio INT,
+    ID_Tipo_Navio int IDENTITY(1,1),
     Nome VARCHAR(255) NOT NULL,
     N_Maximo_Cargas INT NOT NULL,
 
@@ -19,7 +19,7 @@ CREATE TABLE Tipo_Navio(
 ============================================================ */
 
 CREATE TABLE Porto(
-    ID_Porto INT,
+    ID_Porto int IDENTITY(1,1),
     Nome VARCHAR(255) NOT NULL,
     Cidade VARCHAR(255) NOT NULL,
     Pais VARCHAR(255) NOT NULL,
@@ -62,7 +62,7 @@ CREATE TABLE Navio(
         CHECK (
             Ano_Fabrico >= 1900
             AND Ano_Fabrico <= YEAR(GETDATE())
-        ),
+        ),  
 
     CONSTRAINT CK_Estado_Operacional
         CHECK (
@@ -86,7 +86,7 @@ CREATE TABLE Navio(
 ============================================================ */
 
 CREATE TABLE Tipo_Carga(
-    ID_Tipo_Carga INT,
+    ID_Tipo_Carga int IDENTITY(1,1),
     Nome VARCHAR(255) NOT NULL,
     Designacao VARCHAR(255),
 
@@ -99,7 +99,7 @@ CREATE TABLE Tipo_Carga(
 ============================================================ */
 
 CREATE TABLE Carga(
-    ID_Carga INT,
+    ID_Carga int IDENTITY(1,1),
     Designacao VARCHAR(255) NOT NULL,
     Tipo INT NOT NULL,
     Volume FLOAT NOT NULL,
@@ -137,7 +137,7 @@ CREATE TABLE Carga(
 ============================================================ */
 
 CREATE TABLE Risco(
-    ID_Risco INT NOT NULL,
+    ID_Risco int IDENTITY(1,1),
     Designacao VARCHAR(30) NOT NULL,
 
     CONSTRAINT PK_Risco
@@ -195,7 +195,7 @@ CREATE TABLE Tipo_Carga_Navio(
 ============================================================ */
 
 CREATE TABLE Viagem(
-    ID_Viagem INT,
+    ID_Viagem INT identity(1,1),
     ID_Navio INT NOT NULL,
     Data_Partida DATE NOT NULL,
     Data_Chegada_Prevista DATE NOT NULL,

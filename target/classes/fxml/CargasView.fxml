@@ -23,14 +23,12 @@
                            prefHeight="30.0" prefWidth="240.0"
                            promptText="Pesquisar carga..."
                            onAction="#handleSearchCarga" />
-                <Button fx:id="btnSearchCarga"
-                        text="Pesquisar"
+                <Button text="Pesquisar"
                         prefHeight="30.0"
                         mnemonicParsing="false"
                         onAction="#handleSearchCarga" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnAdicionarCarga"
-                        text="Adicionar Carga"
+                <Button text="Adicionar Carga"
                         prefHeight="30.0"
                         mnemonicParsing="false"
                         onAction="#handleAdicionarCarga"
@@ -44,10 +42,12 @@
                    AnchorPane.topAnchor="58.0"
                    AnchorPane.bottomAnchor="16.0">
             <columns>
-                <TableColumn fx:id="colTipoCarga"  text="Tipo de Carga" prefWidth="200.0" />
-                <TableColumn fx:id="colPeso"        text="Peso (kg)"     prefWidth="130.0" />
-                <TableColumn fx:id="colEstado"      text="Estado"        prefWidth="130.0" />
-                <TableColumn fx:id="colObservacoes" text="Observações"   prefWidth="220.0" />
+                <TableColumn fx:id="colDesignacao"    text="Designação"       prefWidth="200.0" />
+                <TableColumn fx:id="colTipo"          text="Tipo"             prefWidth="100.0" />
+                <TableColumn fx:id="colVolume"        text="Volume (m³)"      prefWidth="120.0" />
+                <TableColumn fx:id="colPeso"          text="Peso (kg)"        prefWidth="120.0" />
+                <TableColumn fx:id="colPortoCarga"    text="Porto de Carga"   prefWidth="150.0" />
+                <TableColumn fx:id="colPortoDescarga" text="Porto de Descarga" prefWidth="150.0" />
             </columns>
         </TableView>
 

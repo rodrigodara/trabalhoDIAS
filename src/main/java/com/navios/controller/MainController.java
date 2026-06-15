@@ -1,5 +1,8 @@
 package com.navios.controller;
 
+import com.navios.DB.NavioDAO;
+import com.navios.DB.ViagemDAO;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,11 +25,30 @@ public class MainController {
     @FXML private VBox dashboardView;
     @FXML private Label lblNomeApp;
 
+    @FXML private Label lblTotalNavios;
+    @FXML private Label lblTotalViagens;
+    @FXML private Label lblTotalCargas;
+    @FXML private Label lblTotalTripulacao;
+
+
 
     private boolean expanded = true;
     private static final double SIDEBAR_EXPANDED = 160.0;
     private static final double SIDEBAR_COLLAPSED = 50.0;
 
+     @FXML
+    public void initialize() {
+        carregarDashboard();
+    }
+
+    
+
+    private void carregarDashboard() {
+        NavioDAO dao = new NavioDAO();
+        ViagemDAO viagemDAO = new ViagemDAO();
+        lblTotalNavios.setText(String.valueOf(dao.listarNavios().size()));
+        lblTotalViagens.setText(String.valueOf(new ViagemDAO().listarViagens().size()));
+    }
 
     @FXML
         private void handleToggleMenu() {
@@ -45,6 +67,7 @@ public class MainController {
         AnchorPane.setBottomAnchor(dashboardView, 0.0);
         AnchorPane.setLeftAnchor(dashboardView, 0.0);
         AnchorPane.setRightAnchor(dashboardView, 0.0);
+        carregarDashboard();
     }
 
     @FXML
@@ -64,7 +87,7 @@ public class MainController {
 
     @FXML
     private void handleTripulacao() {
-        carregarView("/fxml/TripulacaoView.fxml");
+        carregarView("/fxml/TripulanteView.fxml");
     }
 
     private void carregarView(String fxml) {

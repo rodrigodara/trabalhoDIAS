@@ -1,10 +1,9 @@
 com\navios\DB\NavioDAO.class
-com\navios\controller\AdicionarNavioController.class
-com\navios\App.class
 com\navios\controller\ViagemController.class
 com\navios\model\Navio.class
 com\navios\controller\CargasController.class
+com\navios\DB\LigacaoDB.class
+com\navios\controller\AdicionarNavioController.class
+com\navios\App.class
 com\navios\controller\MainController.class
 com\navios\controller\NavioController.class
-com\navios\DB\LigacaoDB.class
-com\navios\controller\TripulacaoController.class

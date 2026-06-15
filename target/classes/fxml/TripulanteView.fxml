@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="489.0" prefWidth="768.0"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.navios.controller.TripulacaoController">
+            fx:controller="com.navios.controller.TripulanteController">
     <children>
 
         <HBox alignment="CENTER_LEFT" spacing="10.0"
@@ -23,14 +23,12 @@
                            prefHeight="30.0" prefWidth="240.0"
                            promptText="Pesquisar tripulante..."
                            onAction="#handleSearchTripulante" />
-                <Button fx:id="btnSearchTripulante"
-                        text="Pesquisar"
+                <Button text="Pesquisar"
                         prefHeight="30.0"
                         mnemonicParsing="false"
                         onAction="#handleSearchTripulante" />
                 <Region HBox.hgrow="ALWAYS" />
-                <Button fx:id="btnAdicionarTripulante"
-                        text="Adicionar Tripulante"
+                <Button text="Adicionar Tripulante"
                         prefHeight="30.0"
                         mnemonicParsing="false"
                         onAction="#handleAdicionarTripulante"
@@ -44,10 +42,11 @@
                    AnchorPane.topAnchor="58.0"
                    AnchorPane.bottomAnchor="16.0">
             <columns>
-                <TableColumn fx:id="colNomeTripulante"  text="Nome do Tripulante"   prefWidth="200.0" />
-                <TableColumn fx:id="colCargo"  text="Cargo"   prefWidth="150.0" />
-                <TableColumn fx:id="colEstado"     text="Estado"          prefWidth="150.0" />
-                <TableColumn fx:id="colObservacoes" text="Observações"    prefWidth="220.0" />
+                <TableColumn fx:id="colNome"                  text="Nome"                  prefWidth="150.0" />
+                <TableColumn fx:id="colSobrenome"             text="Sobrenome"             prefWidth="150.0" />
+                <TableColumn fx:id="colEstadoDisponibilidade" text="Estado"                prefWidth="120.0" />
+                <TableColumn fx:id="colNacionalidade"         text="Nacionalidade"         prefWidth="130.0" />
+                <TableColumn fx:id="colDataNascimento"        text="Data de Nascimento"    prefWidth="150.0" />
             </columns>
         </TableView>
 
