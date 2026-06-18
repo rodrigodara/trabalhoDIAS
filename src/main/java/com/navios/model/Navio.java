@@ -34,4 +34,14 @@ public class Navio {
     public String getBandeira() { return bandeira; }
     public int getAnoFabrico() { return anoFabrico; }
     public String getEstadoOperacional() { return estadoOperacional; }
+
+    public void setIdNavio(int idNavio) { this.idNavio = idNavio; }
+    public void setNome(String nome) { this.nome = nome; }
+    public void setIdentificadorIMO(String identificadorIMO) { this.identificadorIMO = identificadorIMO; }
+    public void setTipo(int tipo) { this.tipo = tipo; }
+    public void setNCompartimentos(int nCompartimentos) { this.nCompartimentos = nCompartimentos; }
+    public void setNMaximoCargas(int nMaximoCargas) { this.nMaximoCargas = nMaximoCargas; }
+    public void setBandeira(String bandeira) { this.bandeira = bandeira; }
+    public void setAnoFabrico(int anoFabrico) { this.anoFabrico = anoFabrico; }
+    public void setEstadoOperacional(String estadoOperacional) { this.estadoOperacional = estadoOperacional; }
 }

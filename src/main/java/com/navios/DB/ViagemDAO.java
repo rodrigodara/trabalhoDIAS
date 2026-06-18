@@ -60,4 +60,29 @@ public class ViagemDAO {
             e.printStackTrace();
         }
     }
+
+    // ─── NOVO ─────────────────────────────────────────────────────────────
+    public void atualizarViagem(Viagem viagem) {
+        String sql = """
+            UPDATE Viagem
+            SET Data_Partida = ?, Data_Chegada_Prevista = ?,
+                Porto_Origem = ?, Porto_Destino = ?, Estado_Viagem = ?
+            WHERE ID_Viagem = ?
+            """;
+
+        try (Connection conn         = LigacaoDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDate  (1, java.sql.Date.valueOf(viagem.getDataPartida()));
+            pstmt.setDate  (2, java.sql.Date.valueOf(viagem.getDataChegadaPrevista()));
+            pstmt.setInt   (3, viagem.getPortoOrigem());
+            pstmt.setInt   (4, viagem.getPortoDestino());
+            pstmt.setString(5, viagem.getEstadoViagem());
+            pstmt.setInt   (6, viagem.getIdViagem());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

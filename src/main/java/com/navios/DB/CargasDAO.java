@@ -60,4 +60,28 @@ public class CargasDAO {
             e.printStackTrace();
         }
     }
+    public void atualizarCarga(Carga carga) {
+    String sql = """
+        UPDATE Carga
+        SET Designacao = ?, Tipo = ?, Volume = ?,
+            Peso = ?, Porto_Carga = ?, Porto_Descarga = ?
+        WHERE ID_Carga = ?
+        """;
+
+    try (Connection conn         = LigacaoDB.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+        pstmt.setString(1, carga.getDesignacao());
+        pstmt.setInt   (2, carga.getTipo());
+        pstmt.setFloat (3, carga.getVolume());
+        pstmt.setFloat (4, carga.getPeso());
+        pstmt.setInt   (5, carga.getPortoCarga());
+        pstmt.setInt   (6, carga.getPortoDescarga());
+        pstmt.setInt   (7, carga.getIdCarga());  // WHERE no fim
+
+        pstmt.executeUpdate();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    }
 }

@@ -19,16 +19,16 @@
               AnchorPane.rightAnchor="24.0"
               AnchorPane.topAnchor="16.0">
             <children>
-                <TextField fx:id="txtPesquisa"
-                           prefHeight="30.0" prefWidth="240.0"
+                <TextField fx:id="txtSearchNavio"
                            promptText="Pesquisar navio..."
-                           onAction="#handleSearchNavio" />
+                           prefHeight="30.0"
+                           prefWidth="240.0" />
+
                 <Button fx:id="btnSearchNavio"
                         text="Pesquisar"
                         prefHeight="30.0"
                         mnemonicParsing="false"
                         onAction="#handleSearchNavio" />
-                <Region HBox.hgrow="ALWAYS" />
                 <Button fx:id="btnAdicionarNavio"
                         text="Adicionar Navio"
                         prefHeight="30.0"
@@ -44,12 +44,13 @@
                    AnchorPane.topAnchor="58.0"
                    AnchorPane.bottomAnchor="16.0">
             <columns>
-                <TableColumn fx:id="colId"      text="ID" />
-                <TableColumn fx:id="colNome"    text="Nome" />
-                <TableColumn fx:id="colIMO"     text="IMO" />
+                <TableColumn fx:id="colId"       text="ID" />
+                <TableColumn fx:id="colNome"     text="Nome" />
+                <TableColumn fx:id="colIMO"      text="IMO" />
                 <TableColumn fx:id="colBandeira" text="Bandeira" />
-                <TableColumn fx:id="colAno"     text="Ano Fabrico" />
-                <TableColumn fx:id="colEstado"  text="Estado" />
+                <TableColumn fx:id="colAno"      text="Ano Fabrico" />
+                <TableColumn fx:id="colEstado"   text="Estado" />
+                <TableColumn fx:id="colAcoes"    text="Ações" />
             </columns>
         </TableView>
 

@@ -1,6 +1,8 @@
 package com.navios.controller;
 
+import com.navios.DB.CargasDAO;
 import com.navios.DB.NavioDAO;
+import com.navios.DB.TripulanteDAO;
 import com.navios.DB.ViagemDAO;
 
 import javafx.fxml.FXML;
@@ -46,8 +48,12 @@ public class MainController {
     private void carregarDashboard() {
         NavioDAO dao = new NavioDAO();
         ViagemDAO viagemDAO = new ViagemDAO();
+        TripulanteDAO tripulanteDAO = new TripulanteDAO();
+        CargasDAO cargaDAO = new CargasDAO();
         lblTotalNavios.setText(String.valueOf(dao.listarNavios().size()));
-        lblTotalViagens.setText(String.valueOf(new ViagemDAO().listarViagens().size()));
+        lblTotalViagens.setText(String.valueOf(viagemDAO.listarViagens().size()));
+        lblTotalCargas.setText(String.valueOf(cargaDAO.listarCargas().size()));
+        lblTotalTripulacao.setText(String.valueOf(tripulanteDAO.listarTripulantes().size()));
     }
 
     @FXML
@@ -61,7 +67,6 @@ public class MainController {
         }
     @FXML
     private void handleInicio() {
-        // ✅ repõe o dashboard sem carregar nenhum FXML
         mainContent.getChildren().setAll(dashboardView);
         AnchorPane.setTopAnchor(dashboardView, 0.0);
         AnchorPane.setBottomAnchor(dashboardView, 0.0);

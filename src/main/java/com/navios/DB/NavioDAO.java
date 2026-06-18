@@ -13,7 +13,7 @@ import com.navios.model.Navio;
 public class NavioDAO {
 
     public List<Navio> listarNavios() {
-        List<Navio> navios = new ArrayList<>();
+        List<Navio> navio = new ArrayList<>();
         String sql = "SELECT * FROM Navio";
 
         try (Connection conn = LigacaoDB.getConnection();
@@ -21,7 +21,7 @@ public class NavioDAO {
             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                navios.add(new Navio(
+                navio.add(new Navio(
                     rs.getInt("ID_Navio"),
                     rs.getString("Nome"),
                     rs.getString("IdentificadorIMO"),
@@ -36,7 +36,7 @@ public class NavioDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return navios;
+        return navio;
     }
     public void inserirNavio(Navio navio) {
         String sql = "INSERT INTO Navio (Nome, IdentificadorIMO, Tipo, N_Compartimentos, N_Maximo_Cargas, Bandeira, Ano_Fabrico, Estado_Operacional) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -58,4 +58,29 @@ public class NavioDAO {
             e.printStackTrace();
         }
     }
+
+    public void atualizarNavio(Navio navio) {
+        String sql = """
+            UPDATE navio    
+            SET nome = ?, IdentificadorIMO = ?, Bandeira = ?,
+                Ano_Fabrico = ?, Estado_Operacional = ?
+            WHERE id_navio = ?
+        """;
+
+        try (Connection conn = LigacaoDB.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, navio.getNome());
+            stmt.setString(2, navio.getIdentificadorIMO());
+            stmt.setString(3, navio.getBandeira());
+            stmt.setInt(4,    navio.getAnoFabrico());
+            stmt.setString(5, navio.getEstadoOperacional());
+            stmt.setInt(6,    navio.getIdNavio());
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+}
 }

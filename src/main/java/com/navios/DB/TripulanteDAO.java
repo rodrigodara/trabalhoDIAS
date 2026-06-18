@@ -57,4 +57,29 @@ public class TripulanteDAO {
             e.printStackTrace();
         }
     }
+
+    // ─── NOVO ─────────────────────────────────────────────────────────────
+    public void atualizarTripulante(Tripulante t) {
+        String sql = """
+            UPDATE Tripulante
+            SET Nome = ?, Sobrenome = ?, Estado_Disponibilidade = ?,
+                Nacionalidade = ?, Data_Nascimento = ?
+            WHERE ID_Tripulante = ?
+            """;
+
+        try (Connection conn         = LigacaoDB.getConnection();
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setString(1, t.getNome());
+            pstmt.setString(2, t.getSobrenome());
+            pstmt.setString(3, t.getEstadoDisponibilidade());
+            pstmt.setString(4, t.getNacionalidade());
+            pstmt.setDate  (5, java.sql.Date.valueOf(t.getDataNascimento()));
+            pstmt.setInt   (6, t.getIdTripulante());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
