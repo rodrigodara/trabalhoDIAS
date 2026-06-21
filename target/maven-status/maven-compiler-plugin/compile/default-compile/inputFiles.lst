@@ -15,6 +15,7 @@ C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\LigacaoDB
 C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\NavioDAO.java
 C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\PortoDAO.java
 C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\TipoCargaDAO.java
+C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\TipoCargaNavioDAO.java
 C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\TipoNavioDAO.java
 C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\TripulacaoDAO.java
 C:\xampp\htdocs\Dias - Navios\trabalhoDIAS\src\main\java\com\navios\DB\TripulanteDAO.java

@@ -51,13 +51,16 @@
                    AnchorPane.topAnchor="68.0"
                    AnchorPane.bottomAnchor="20.0">
             <columns>
-                <TableColumn fx:id="colId"       text="ID" />
-                <TableColumn fx:id="colNome"     text="Nome" />
-                <TableColumn fx:id="colIMO"      text="IMO" />
-                <TableColumn fx:id="colBandeira" text="Bandeira" />
-                <TableColumn fx:id="colAno"      text="Ano Fabrico" />
-                <TableColumn fx:id="colEstado"   text="Estado" />
-                <TableColumn fx:id="colAcoes"    text="Ações" />
+                <TableColumn fx:id="colId"             text="ID" />
+                <TableColumn fx:id="colNome"           text="Nome" />
+                <TableColumn fx:id="colIMO"            text="IMO" />
+                <TableColumn fx:id="colTipo"           text="Tipo" />
+                <TableColumn fx:id="colBandeira"       text="Bandeira" />
+                <TableColumn fx:id="colAno"            text="Ano Fabrico" />
+                <TableColumn fx:id="colCompartimentos" text="Compartimentos" />
+                <TableColumn fx:id="colMaxCargas"      text="Max. Cargas" />
+                <TableColumn fx:id="colEstado"         text="Estado" />
+                <TableColumn fx:id="colAcoes"          text="Ações" />
             </columns>
         </TableView>
 

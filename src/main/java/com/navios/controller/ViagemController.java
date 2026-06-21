@@ -13,6 +13,7 @@ import com.navios.DB.CargasDAO;
 import com.navios.DB.FuncaoDAO;
 import com.navios.DB.NavioDAO;
 import com.navios.DB.PortoDAO;
+import com.navios.DB.TipoCargaNavioDAO;
 import com.navios.DB.TripulacaoDAO;
 import com.navios.DB.TripulanteDAO;
 import com.navios.DB.ViagemDAO;
@@ -42,8 +43,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -231,6 +232,10 @@ public class ViagemController {
             Carga carga = listCargasDisponiveis.getSelectionModel().getSelectedItem();
             if (carga == null) return;
             if (navioDaViagem != null && cargasViagem.size() >= navioDaViagem.getNMaximoCargas()) return;
+            if (navioDaViagem != null && !new TipoCargaNavioDAO().isCompativel(navioDaViagem.getTipo(), carga.getTipo())) {
+                return; // ou mostrar um Alert
+            }
+
             cargasDisponiveis.remove(carga);
             cargasViagem.add(carga);
         });
@@ -309,20 +314,36 @@ public class ViagemController {
 
         dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
+
+                String novoEstado = cbEstado.getValue();
+                boolean vaiFicarAtiva = "planeada".equals(novoEstado) || "em curso".equals(novoEstado);
+
+                // Regra 2 — validar ANTES de gravar
+                if (vaiFicarAtiva && new ViagemDAO().existeViagemAtivaParaNavio(v.getIdNavio(), v.getIdViagem())) {
+                    new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR,
+                        "Este navio já tem outra viagem ativa.").showAndWait();
+                    return null;
+                }
+
+                // Regra 1 — também em falta aqui
+                if (vaiFicarAtiva && navioDaViagem != null
+                        && !"ativo".equalsIgnoreCase(navioDaViagem.getEstadoOperacional())) {
+                    new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR,
+                        "O navio \"" + navioDaViagem.getNome() + "\" está \"" + navioDaViagem.getEstadoOperacional()
+                        + "\" e não pode ficar com uma viagem ativa.").showAndWait();
+                    return null;
+                }
+
                 Viagem atualizada = new Viagem(
-                    v.getIdViagem(),
-                    v.getIdNavio(),
-                    dpPartida.getValue(),
-                    dpChegada.getValue(),
-                    cbOrigem.getValue().getIdPorto(),
-                    cbDestino.getValue().getIdPorto(),
+                    v.getIdViagem(), v.getIdNavio(),
+                    dpPartida.getValue(), dpChegada.getValue(),
+                    cbOrigem.getValue().getIdPorto(), cbDestino.getValue().getIdPorto(),
                     cbEstado.getValue()
                 );
                 dao.atualizarViagem(atualizada);
+
                 Set<Integer> idsCargasAtualizadas = new HashSet<>();
-                for (Carga carga : cargasViagem) {
-                    idsCargasAtualizadas.add(carga.getIdCarga());
-                }
+                for (Carga carga : cargasViagem) idsCargasAtualizadas.add(carga.getIdCarga());
                 new CargaViagemDAO().substituirCargasDaViagem(v.getIdViagem(), idsCargasAtualizadas);
                 new TripulacaoDAO().substituirTripulacaoDaViagem(v.getIdViagem(), funcoesPorTripulante);
                 carregarViagens();

@@ -1,6 +1,7 @@
 package com.navios.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import com.navios.DB.NavioDAO;
 import com.navios.DB.TipoNavioDAO;
@@ -41,6 +42,9 @@ public class NavioController {
     @FXML private TableColumn<Navio, Integer> colAno;
     @FXML private TableColumn<Navio, String>  colEstado;
     @FXML private TableColumn<Navio, Void>    colAcoes;  // ← NOVO
+    @FXML private TableColumn<Navio, Integer> colTipo;
+    @FXML private TableColumn<Navio, Integer> colCompartimentos;
+    @FXML private TableColumn<Navio, Integer> colMaxCargas;
 
     private final NavioDAO dao = new NavioDAO(); // ← partilhado entre métodos
 
@@ -48,12 +52,31 @@ public class NavioController {
 
     @FXML
     public void initialize() {
+        List<TipoNavio> tiposNavio = new TipoNavioDAO().listarTipos();        
+        colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        colTipo.setCellFactory(col -> new TableCell<>() {
+            @Override
+            protected void updateItem(Integer id, boolean empty) {
+                super.updateItem(id, empty);
+                if (empty || id == null) {
+                    setText(null);
+                } else {
+                    tiposNavio.stream()
+                        .filter(t -> t.getIdTipoNavio() == id)
+                        .findFirst()
+                        .ifPresentOrElse(t -> setText(t.getNome()), () -> setText("Tipo " + id));
+                }
+            }
+        });
         colId.setCellValueFactory(new PropertyValueFactory<>("idNavio"));
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colIMO.setCellValueFactory(new PropertyValueFactory<>("identificadorIMO"));
         colBandeira.setCellValueFactory(new PropertyValueFactory<>("bandeira"));
         colAno.setCellValueFactory(new PropertyValueFactory<>("anoFabrico"));
         colEstado.setCellValueFactory(new PropertyValueFactory<>("estadoOperacional"));
+        colCompartimentos.setCellValueFactory(new PropertyValueFactory<>("nCompartimentos"));
+        colMaxCargas.setCellValueFactory(new PropertyValueFactory<>("nMaximoCargas"));
+        
 
         configurarColunaAcoes();
 

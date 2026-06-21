@@ -1,6 +1,7 @@
 package com.navios.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.List;
 
 import com.navios.DB.TripulanteDAO;
@@ -118,6 +119,16 @@ public class TripulanteController {
 
         dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
+                if (dpNasc.getValue() == null) {
+                new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR,
+                    "Por favor seleciona a data de nascimento.").showAndWait();
+                return null;
+            }
+            if (dpNasc.getValue().isAfter(LocalDate.now().minusYears(16))) {
+                new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR,
+                    "O tripulante deve ter pelo menos 16 anos.").showAndWait();
+                return null;
+            }
                 Tripulante atualizado = new Tripulante(
                     t.getIdTripulante(),
                     txtNome.getText(),

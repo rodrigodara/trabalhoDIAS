@@ -67,6 +67,28 @@ public class ViagemDAO {
         }
         return 0;
     }
+    public boolean existeViagemAtivaParaNavio(int idNavio, int idViagemAtual) {
+        String sql = """
+            SELECT COUNT(*) FROM Viagem
+            WHERE ID_Navio = ?
+            AND Estado_Viagem IN ('planeada', 'em curso')
+            AND ID_Viagem <> ?
+            """;
+
+        try (Connection conn = LigacaoDB.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, idNavio);
+            stmt.setInt(2, idViagemAtual); // 0 quando é viagem nova
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                return rs.next() && rs.getInt(1) > 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     // ─── NOVO ─────────────────────────────────────────────────────────────
     public void atualizarViagem(Viagem viagem) {

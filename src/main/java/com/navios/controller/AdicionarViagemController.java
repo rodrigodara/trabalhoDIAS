@@ -12,6 +12,7 @@ import com.navios.DB.CargasDAO;
 import com.navios.DB.FuncaoDAO;
 import com.navios.DB.NavioDAO;
 import com.navios.DB.PortoDAO;
+import com.navios.DB.TipoCargaNavioDAO;
 import com.navios.DB.TripulacaoDAO;
 import com.navios.DB.TripulanteDAO;
 import com.navios.DB.ViagemDAO;
@@ -90,6 +91,11 @@ public class AdicionarViagemController {
             mostrarErro("O navio selecionado nao permite mais cargas nesta viagem.");
             return;
         }
+        if (navio != null && !new TipoCargaNavioDAO().isCompativel(navio.getTipo(), carga.getTipo())) {
+            mostrarErro("A carga \"" + carga.getDesignacao() + "\" não é compatível com este tipo de navio.");
+            return;
+        }
+        
 
         cargasDisponiveis.remove(carga);
         cargasViagem.add(carga);
@@ -151,6 +157,7 @@ public class AdicionarViagemController {
         if (!validarCampos()) {
             return;
         }
+        
 
         LocalDate partida = dataPartidaPicker.getValue();
         LocalDate chegada = dataChegadaPrevistaPicker.getValue();
@@ -165,11 +172,22 @@ public class AdicionarViagemController {
             mostrarErro("Por favor seleciona o navio.");
             return;
         }
+        if (!"ativo".equalsIgnoreCase(navio.getEstadoOperacional())) {
+            mostrarErro("O navio \"" + navio.getNome() + "\" está \"" 
+                + navio.getEstadoOperacional() + "\" e não pode iniciar uma viagem.");
+            return;
+        }
         if (cargasViagem.size() > navio.getNMaximoCargas()) {
             mostrarErro("O numero de cargas desta viagem excede o maximo permitido pelo navio.");
             return;
         }
+        String estado = estadoViagemCombo.getValue();
+        boolean vaiFicarAtiva = "planeada".equals(estado) || "em curso".equals(estado);
 
+        if (vaiFicarAtiva && new ViagemDAO().existeViagemAtivaParaNavio(navio.getIdNavio(), 0)) {
+            mostrarErro("O navio \"" + navio.getNome() + "\" já tem uma viagem ativa em curso/planeada.");
+            return;
+        }
         Viagem viagem = new Viagem(
             0,
             navio.getIdNavio(),

@@ -38,7 +38,10 @@ INSERT INTO Tipo_Navio (Nome, N_Maximo_Cargas) VALUES
 ('Petroleiro de crude', 200),
 ('Produtos refinados', 180),
 ('Químico',            120),
-('Químico/produtos',   150);
+('Químico/produtos',   150),
+('Porta-Contentores', 250),
+('Graneleiro',         200),
+('Ro-Ro',              100);
 
 
 /* ============================================================
@@ -51,7 +54,9 @@ INSERT INTO Porto (Nome, Cidade, Pais, Longitude, Latitude) VALUES
 ('Porto de Roterdão',  'Roterdão',  'Países Baixos',  4.477700, 51.922500),
 ('Porto de Hamburgo',  'Hamburgo',  'Alemanha',        9.993700, 53.548800),
 ('Porto de Génova',    'Génova',    'Itália',          8.923200, 44.405600),
-('Porto de Valência',  'Valência',  'Espanha',        -0.328300, 39.453900);
+('Porto de Valência',  'Valência',  'Espanha',        -0.328300, 39.453900),
+('Porto de Antuérpia', 'Antuérpia', 'Bélgica',         4.400000, 51.219400),
+('Porto de Marselha', 'Marselha',  'França',          5.369800, 43.296500);
 
 
 /* ============================================================
@@ -85,8 +90,12 @@ INSERT INTO Funcao (Nome) VALUES
 ('Imediato'),
 ('Maquinista-Chefe'),
 ('Marinheiro'),
-('Engenheiro de Bordo');
-
+('Engenheiro de Bordo'),
+('Técnico de Comunicações'),
+('Profissional de Segurança'),
+('Profissional de Carga'),
+('Profissional de Navegação'),
+('Profissional de Máquinas');
 
 /* ============================================================
    6. NAVIO
@@ -99,7 +108,11 @@ INSERT INTO Navio (Nome, IdentificadorIMO, Tipo, N_Compartimentos, N_Maximo_Carg
 ('NM Atlântico',    'IMO1234567', 1, 10, 200, 'Portugal', 2005, 'ativo'),
 ('NM Mediterrâneo', 'IMO2345678', 2,  8, 150, 'Espanha',  2010, 'ativo'),
 ('NM Oceânico',     'IMO3456789', 3,  6, 100, 'Portugal', 2015, 'ativo'),
-('NM Europa',       'IMO4567890', 4,  5,  80, 'Alemanha', 2018, 'em manutenção');
+('NM Europa',       'IMO4567890', 4,  5,  80, 'Alemanha', 2018, 'em manutenção'),
+('NM Pacífico',     'IMO5678901', 1, 12, 250, 'Espanha',  2020, 'ativo'),
+('NM Ártico',       'IMO6789012', 2,  9, 200, 'Noruega',  2019, 'ativo'),
+('NM Índico',       'IMO7890123', 3,  7, 150, 'Itália',   2021, 'ativo'),
+('NM Antártico',    'IMO8901234', 4,  6, 100, 'Chile',    2022, 'ativo');
 
 
 /* ============================================================
@@ -174,7 +187,15 @@ INSERT INTO Tripulante (Nome, Sobrenome, Estado_Disponibilidade, Nacionalidade, 
 ('Carlos',  'Ferreira', 'disponível', 'Portuguesa', '1985-07-22'),
 ('Miguel',  'Santos',   'disponível', 'Espanhola',  '1990-11-10'),
 ('António', 'Costa',    'disponível', 'Portuguesa', '1978-05-30'),
-('Rui',     'Oliveira', 'disponível', 'Alemã',      '1992-01-18');
+('Rui',     'Oliveira', 'disponível', 'Alemã',      '1992-01-18'),
+('Pedro',   'Martins',  'disponível', 'Italiana',   '1988-09-05'),
+('Luís',    'Gomes',    'disponível', 'Norueguesa', '1995-12-12'),
+('Sofia',   'Almeida',  'disponível', 'Chilena',    '1983-04-25'),
+('Ana',     'Pereira',  'disponível', 'Belga',      '1991-06-14'),
+('Mariana', 'Rodrigues','disponível', 'Francesa',   '1987-08-03'),
+('Sara', 'Oliveira', 'disponível', 'Portuguesa', '2006-09-17'),
+('Gonçalo','Alves', 'disponível', 'Portuguesa', '2007-11-04');
+
 
 
 /* ============================================================

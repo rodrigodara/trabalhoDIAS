@@ -59,8 +59,8 @@ public class AdicionarTripulanteController {
         }
 
         LocalDate dataNascimento = dataNascimentoPicker.getValue();
-        if (dataNascimento.isAfter(LocalDate.now().minusYears(18))) {
-            mostrarErro("O tripulante deve ter pelo menos 18 anos.");
+        if (dataNascimento.isAfter(LocalDate.now().minusYears(16))) {
+            mostrarErro("O tripulante deve ter pelo menos 16 anos.");
             return;
         }
 

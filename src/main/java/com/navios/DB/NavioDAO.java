@@ -38,6 +38,7 @@ public class NavioDAO {
         }
         return navio;
     }
+    
     public void inserirNavio(Navio navio) {
         String sql = "INSERT INTO Navio (Nome, IdentificadorIMO, Tipo, N_Compartimentos, N_Maximo_Cargas, Bandeira, Ano_Fabrico, Estado_Operacional) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
