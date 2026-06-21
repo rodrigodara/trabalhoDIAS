@@ -1,8 +1,11 @@
 package com.navios.controller;
 
 import com.navios.DB.NavioDAO;
+import com.navios.DB.TipoNavioDAO;
 import com.navios.model.Navio;
+import com.navios.model.TipoNavio;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -16,13 +19,20 @@ public class AdicionarNavioController {
     @FXML private TextField identificadorImoField;
     @FXML private TextField bandeiraField;
     @FXML private TextField anoFabricoField;       // era "anoField" → não existia no FXML
-    @FXML private ComboBox<String> tipoNavioCombo;
+    @FXML private ComboBox<TipoNavio> tipoNavioCombo;
     @FXML private ComboBox<String> estadoOperacionalCombo;
     @FXML private Spinner<Integer> compartimentosSpinner; // era "capacidadeField" → não existia
     @FXML private Spinner<Integer> maxCargasSpinner;      // novo
     @FXML private Label erroLabel;
 
     // "observacoesArea" removida — não existe no FXML
+
+    @FXML
+    private void initialize() {
+        tipoNavioCombo.setItems(FXCollections.observableArrayList(
+            new TipoNavioDAO().listarTipos()
+        ));
+    }
 
     @FXML
     private void handleFecharModal() {
@@ -55,7 +65,7 @@ public class AdicionarNavioController {
 
         try {
             // Tipo é int na BD — usa o índice selecionado + 1
-            int tipo = tipoNavioCombo.getSelectionModel().getSelectedIndex() + 1;
+            int tipo = tipoNavioCombo.getValue().getIdTipoNavio();
 
             Navio navio = new Navio(
                 0,

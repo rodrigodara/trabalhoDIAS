@@ -11,38 +11,45 @@
 <AnchorPane prefHeight="489.0" prefWidth="768.0"
             xmlns="http://javafx.com/javafx/17"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.navios.controller.NavioController">
+            fx:controller="com.navios.controller.NavioController"
+            style="-fx-background-color: #FFFFFF;">
     <children>
 
         <HBox alignment="CENTER_LEFT" spacing="10.0"
               AnchorPane.leftAnchor="24.0"
               AnchorPane.rightAnchor="24.0"
-              AnchorPane.topAnchor="16.0">
+              AnchorPane.topAnchor="20.0">
             <children>
                 <TextField fx:id="txtSearchNavio"
                            promptText="Pesquisar navio..."
-                           prefHeight="30.0"
-                           prefWidth="240.0" />
+                           prefHeight="36.0"
+                           prefWidth="260.0"
+                           style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 0 14 0 14; -fx-font-size: 13px;" />
 
                 <Button fx:id="btnSearchNavio"
                         text="Pesquisar"
-                        prefHeight="30.0"
+                        prefHeight="36.0"
                         mnemonicParsing="false"
-                        onAction="#handleSearchNavio" />
+                        onAction="#handleSearchNavio"
+                        style="-fx-background-color: #FFFFFF; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #374151; -fx-font-size: 13px; -fx-padding: 0 18 0 18; -fx-cursor: hand;" />
+
+                <Region HBox.hgrow="ALWAYS" />
+
                 <Button fx:id="btnAdicionarNavio"
-                        text="Adicionar Navio"
-                        prefHeight="30.0"
+                        text="＋ Adicionar Navio"
+                        prefHeight="36.0"
                         mnemonicParsing="false"
                         onAction="#handleAdicionarNavio"
-                        style="-fx-background-color: #2e4a6b; -fx-text-fill: white; -fx-background-radius: 4;" />
+                        style="-fx-background-color: #1E2433; -fx-text-fill: white; -fx-background-radius: 8; -fx-font-size: 13px; -fx-font-weight: bold; -fx-padding: 0 18 0 18; -fx-cursor: hand;" />
             </children>
         </HBox>
 
         <TableView fx:id="tabelaNavios"
+                   style="-fx-background-color: #FFFFFF; -fx-border-color: #E8ECF2; -fx-border-radius: 8; -fx-background-radius: 8;"
                    AnchorPane.leftAnchor="24.0"
                    AnchorPane.rightAnchor="24.0"
-                   AnchorPane.topAnchor="58.0"
-                   AnchorPane.bottomAnchor="16.0">
+                   AnchorPane.topAnchor="68.0"
+                   AnchorPane.bottomAnchor="20.0">
             <columns>
                 <TableColumn fx:id="colId"       text="ID" />
                 <TableColumn fx:id="colNome"     text="Nome" />

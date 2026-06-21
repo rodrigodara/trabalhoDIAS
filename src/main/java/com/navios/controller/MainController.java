@@ -97,7 +97,17 @@ public class MainController {
 
     private void carregarView(String fxml) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+            var resource = MainController.class.getResource(fxml);
+            if (resource == null && fxml.startsWith("/")) {
+                resource = Thread.currentThread()
+                    .getContextClassLoader()
+                    .getResource(fxml.substring(1));
+            }
+            if (resource == null) {
+                throw new IllegalArgumentException("FXML nao encontrado no classpath: " + fxml);
+            }
+
+            FXMLLoader loader = new FXMLLoader(resource);
             Parent view = loader.load();
             AnchorPane.setTopAnchor(view, 0.0);
             AnchorPane.setBottomAnchor(view, 0.0);

@@ -62,7 +62,8 @@ public class NavioDAO {
     public void atualizarNavio(Navio navio) {
         String sql = """
             UPDATE navio    
-            SET nome = ?, IdentificadorIMO = ?, Bandeira = ?,
+            SET nome = ?, IdentificadorIMO = ?, Tipo = ?,
+                N_Compartimentos = ?, N_Maximo_Cargas = ?, Bandeira = ?,
                 Ano_Fabrico = ?, Estado_Operacional = ?
             WHERE id_navio = ?
         """;
@@ -72,10 +73,13 @@ public class NavioDAO {
 
             stmt.setString(1, navio.getNome());
             stmt.setString(2, navio.getIdentificadorIMO());
-            stmt.setString(3, navio.getBandeira());
-            stmt.setInt(4,    navio.getAnoFabrico());
-            stmt.setString(5, navio.getEstadoOperacional());
-            stmt.setInt(6,    navio.getIdNavio());
+            stmt.setInt(3,    navio.getTipo());
+            stmt.setInt(4,    navio.getNCompartimentos());
+            stmt.setInt(5,    navio.getNMaximoCargas());
+            stmt.setString(6, navio.getBandeira());
+            stmt.setInt(7,    navio.getAnoFabrico());
+            stmt.setString(8, navio.getEstadoOperacional());
+            stmt.setInt(9,    navio.getIdNavio());
 
             stmt.executeUpdate();
 

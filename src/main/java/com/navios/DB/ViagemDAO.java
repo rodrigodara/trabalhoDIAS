@@ -37,7 +37,7 @@ public class ViagemDAO {
         return viagens;
     }
 
-    public void inserirViagem(Viagem viagem) {
+    public int inserirViagem(Viagem viagem) {
         String sql = """
             INSERT INTO Viagem
                 (ID_Navio, Data_Partida, Data_Chegada_Prevista,
@@ -46,7 +46,7 @@ public class ViagemDAO {
             """;
 
         try (Connection conn          = LigacaoDB.getConnection();
-             PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt  = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setInt   (1, viagem.getIdNavio());
             pstmt.setDate  (2, java.sql.Date.valueOf(viagem.getDataPartida()));
@@ -56,9 +56,16 @@ public class ViagemDAO {
             pstmt.setString(6, viagem.getEstadoViagem());
 
             pstmt.executeUpdate();
+
+            try (ResultSet keys = pstmt.getGeneratedKeys()) {
+                if (keys.next()) {
+                    return keys.getInt(1);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     // ─── NOVO ─────────────────────────────────────────────────────────────

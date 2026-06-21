@@ -1,107 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.Rectangle?>
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 
 <StackPane xmlns="http://javafx.com/javafx/17"
            xmlns:fx="http://javafx.com/fxml/1"
            fx:controller="com.navios.controller.AdicionarViagemController"
            style="-fx-background-color: rgba(0,0,0,0.45);">
 
-    <VBox prefWidth="500" maxHeight="680" spacing="0"
-          style="-fx-background-color: #FFFFFF; -fx-background-radius: 12;
-                 -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 24, 0, 0, 8);">
+    <VBox prefWidth="760" maxHeight="760" spacing="0"
+          style="-fx-background-color: #FFFFFF; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 24, 0, 0, 8);">
 
-        <!-- Header -->
         <HBox alignment="CENTER_LEFT" spacing="12"
-              style="-fx-background-color: #1E2433; -fx-background-radius: 12 12 0 0;
-                     -fx-padding: 18 20 18 24;">
-            <Label text="🚢" style="-fx-text-fill: #6B8CFF; -fx-font-size: 18px;"/>
+              style="-fx-background-color: #1E2433; -fx-background-radius: 12 12 0 0; -fx-padding: 18 20 18 24;">
+            <Label text="Viagem" style="-fx-text-fill: #6B8CFF; -fx-font-size: 14px; -fx-font-weight: bold;"/>
             <Label text="Adicionar Nova Viagem"
                    style="-fx-text-fill: #FFFFFF; -fx-font-size: 16px; -fx-font-weight: bold;"/>
             <Region HBox.hgrow="ALWAYS"/>
-            <Button text="✕" onAction="#handleFecharModal"
-                    style="-fx-background-color: transparent; -fx-text-fill: #8A93A8;
-                           -fx-font-size: 16px; -fx-cursor: hand; -fx-padding: 2 8 2 8;
-                           -fx-background-radius: 6;"/>
+            <Button text="X" onAction="#handleFecharModal"
+                    style="-fx-background-color: transparent; -fx-text-fill: #8A93A8; -fx-font-size: 16px; -fx-cursor: hand; -fx-padding: 2 8 2 8; -fx-background-radius: 6;"/>
         </HBox>
 
         <Rectangle height="1" fill="#E8ECF2"/>
 
-        <!-- Body -->
         <ScrollPane fitToWidth="true" hbarPolicy="NEVER" vbarPolicy="AS_NEEDED"
-                    style="-fx-background-color: transparent; -fx-background: transparent;
-                           -fx-border-color: transparent;"
+                    style="-fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent;"
                     VBox.vgrow="ALWAYS">
             <VBox spacing="16" style="-fx-background-color: #FFFFFF;">
                 <padding><Insets top="24" right="24" bottom="8" left="24"/></padding>
 
-                <!-- Navio -->
                 <VBox spacing="5">
-                    <Label text="Navio *"
-                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
-                    <!-- Populado via controller com dados da BD (NavioDAO) -->
+                    <Label text="Navio *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
                     <ComboBox fx:id="navioCombo" promptText="Selecionar navio..." maxWidth="Infinity"
-                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB;
-                                     -fx-border-radius: 8; -fx-background-radius: 8;
-                                     -fx-font-size: 14px;"/>
+                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
                 </VBox>
 
-                <!-- Porto Origem + Porto Destino (lado a lado) -->
                 <HBox spacing="16">
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Porto de Origem *"
-                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
-                        <!-- TODO: Populado via controller com dados da tabela Porto -->
+                        <Label text="Porto de Origem *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
                         <ComboBox fx:id="portoOrigemCombo" promptText="Selecionar porto..." maxWidth="Infinity"
-                                  style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB;
-                                         -fx-border-radius: 8; -fx-background-radius: 8;
-                                         -fx-font-size: 14px;"/>
+                                  style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
                     </VBox>
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Porto de Destino *"
-                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
-                        <!-- TODO: Populado via controller com dados da tabela Porto -->
+                        <Label text="Porto de Destino *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
                         <ComboBox fx:id="portoDestinoCombo" promptText="Selecionar porto..." maxWidth="Infinity"
-                                  style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB;
-                                         -fx-border-radius: 8; -fx-background-radius: 8;
-                                         -fx-font-size: 14px;"/>
+                                  style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
                     </VBox>
                 </HBox>
 
-                <!-- Data Partida + Data Chegada Prevista (lado a lado) -->
                 <HBox spacing="16">
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Data de Partida *"
-                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                        <Label text="Data de Partida *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
                         <DatePicker fx:id="dataPartidaPicker" maxWidth="Infinity"
-                                    style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB;
-                                           -fx-border-radius: 8; -fx-background-radius: 8;
-                                           -fx-font-size: 14px;"/>
+                                    style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
                     </VBox>
                     <VBox spacing="5" HBox.hgrow="ALWAYS">
-                        <Label text="Data de Chegada Prevista *"
-                               style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                        <Label text="Data de Chegada Prevista *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
                         <DatePicker fx:id="dataChegadaPrevistaPicker" maxWidth="Infinity"
-                                    style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB;
-                                           -fx-border-radius: 8; -fx-background-radius: 8;
-                                           -fx-font-size: 14px;"/>
+                                    style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;"/>
                     </VBox>
                 </HBox>
 
-                <!-- Estado da Viagem -->
                 <VBox spacing="5">
-                    <Label text="Estado da Viagem *"
-                           style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
-                    <!-- TODO: confirmar valores exactos do CHECK constraint da BD -->
+                    <Label text="Estado da Viagem *" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
                     <ComboBox fx:id="estadoViagemCombo" promptText="Selecionar estado..." maxWidth="Infinity"
-                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB;
-                                     -fx-border-radius: 8; -fx-background-radius: 8;
-                                     -fx-font-size: 14px;">
+                              style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-font-size: 14px;">
                         <items>
                             <FXCollections fx:factory="observableArrayList">
                                 <String fx:value="planeada"/>
@@ -113,33 +80,58 @@
                     </ComboBox>
                 </VBox>
 
-                <!-- Erro -->
-                <Label fx:id="erroLabel" text="" wrapText="true"
-                       visible="false" managed="false"
-                       style="-fx-background-color: #FEF2F2; -fx-text-fill: #DC2626;
-                              -fx-font-size: 13px; -fx-padding: 10 14 10 14;
-                              -fx-background-radius: 8; -fx-border-color: #FECACA;
-                              -fx-border-radius: 8;"/>
+                <Rectangle height="1" fill="#F3F4F6"/>
+
+                <Label text="CARGAS DESTA VIAGEM"
+                       style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #9CA3AF;"/>
+                <HBox spacing="12">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Cargas disponiveis" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                        <ListView fx:id="cargasDisponiveisList" prefHeight="130"/>
+                    </VBox>
+                    <VBox spacing="8" alignment="CENTER">
+                        <Button text="Adicionar" onAction="#handleAdicionarCarga"/>
+                        <Button text="Remover" onAction="#handleRemoverCarga"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Cargas da viagem" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                        <ListView fx:id="cargasViagemList" prefHeight="130"/>
+                    </VBox>
+                </HBox>
+
+                <Rectangle height="1" fill="#F3F4F6"/>
+
+                <Label text="TRIPULACAO DESTA VIAGEM"
+                       style="-fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: #9CA3AF;"/>
+                <HBox spacing="12">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Tripulantes disponiveis" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                        <ListView fx:id="tripulantesDisponiveisList" prefHeight="130"/>
+                    </VBox>
+                    <VBox spacing="8" alignment="CENTER">
+                        <ComboBox fx:id="funcaoTripulanteCombo" promptText="Funcao" prefWidth="140"/>
+                        <Button text="Adicionar" onAction="#handleAdicionarTripulante"/>
+                        <Button text="Remover" onAction="#handleRemoverTripulante"/>
+                    </VBox>
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Tripulacao da viagem" style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280;"/>
+                        <ListView fx:id="tripulantesViagemList" prefHeight="130"/>
+                    </VBox>
+                </HBox>
+
+                <Label fx:id="erroLabel" text="" wrapText="true" visible="false" managed="false"
+                       style="-fx-background-color: #FEF2F2; -fx-text-fill: #DC2626; -fx-font-size: 13px; -fx-padding: 10 14 10 14; -fx-background-radius: 8; -fx-border-color: #FECACA; -fx-border-radius: 8;"/>
             </VBox>
         </ScrollPane>
 
         <Rectangle height="1" fill="#E8ECF2"/>
 
-        <!-- Footer -->
         <HBox alignment="CENTER_RIGHT" spacing="12"
-              style="-fx-background-color: #F8F9FB; -fx-background-radius: 0 0 12 12;
-                     -fx-padding: 16 24 20 24;">
+              style="-fx-background-color: #F8F9FB; -fx-background-radius: 0 0 12 12; -fx-padding: 16 24 20 24;">
             <Button text="Cancelar" onAction="#handleFecharModal"
-                    style="-fx-background-color: #FFFFFF; -fx-border-color: #D1D5DB;
-                           -fx-border-radius: 8; -fx-background-radius: 8;
-                           -fx-text-fill: #374151; -fx-font-size: 14px;
-                           -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
-            <Button text="  Guardar Viagem  " defaultButton="true"
-                    onAction="#handleGuardarViagem"
-                    style="-fx-background-color: #1E2433; -fx-background-radius: 8;
-                           -fx-text-fill: #FFFFFF; -fx-font-size: 14px;
-                           -fx-font-weight: bold; -fx-padding: 10 24 10 24;
-                           -fx-cursor: hand; -fx-border-color: transparent;"/>
+                    style="-fx-background-color: #FFFFFF; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-text-fill: #374151; -fx-font-size: 14px; -fx-padding: 10 20 10 20; -fx-cursor: hand;"/>
+            <Button text="Guardar Viagem" defaultButton="true" onAction="#handleGuardarViagem"
+                    style="-fx-background-color: #1E2433; -fx-background-radius: 8; -fx-text-fill: #FFFFFF; -fx-font-size: 14px; -fx-font-weight: bold; -fx-padding: 10 24 10 24; -fx-cursor: hand; -fx-border-color: transparent;"/>
         </HBox>
 
     </VBox>

@@ -58,7 +58,7 @@
                           maxWidth="Infinity">
                      <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>
                   </Button>
-                  <Button fx:id="btnTripulacao" mnemonicParsing="false" onAction="#handleTripulacao" text="👥  Tripulação"
+                  <Button fx:id="btnTripulacao" mnemonicParsing="false" onAction="#handleTripulacao" text="👤  Tripulante"
                           style="-fx-background-color: transparent; -fx-text-fill: #ecf0f1; -fx-font-size: 13px; -fx-alignment: CENTER-LEFT; -fx-cursor: hand;"
                           maxWidth="Infinity">
                      <padding><Insets bottom="14.0" left="20.0" right="40.0" top="14.0" /></padding>

@@ -155,7 +155,7 @@ CREATE TABLE Risco(
 ============================================================ */
 
 CREATE TABLE Risco_Tipo_Carga(
-    ID_Risco INT NOT NULL,
+    ID_Risco int IDENTITY(1,1),
     ID_Tipo_Carga INT NOT NULL,
 
     CONSTRAINT PK_Risco_Tipo_Carga
@@ -175,7 +175,7 @@ CREATE TABLE Risco_Tipo_Carga(
 ============================================================ */
 
 CREATE TABLE Tipo_Carga_Navio(
-    ID_Tipo_Carga INT NOT NULL,
+    ID_Tipo_Carga INT IDENTITY(1,1),
     ID_Tipo_Navio INT NOT NULL,
 
     CONSTRAINT PK_Tipo_Carga_Navio
@@ -264,7 +264,7 @@ CREATE TABLE Carga_Viagem(
 ============================================================ */
 
 CREATE TABLE Funcao(
-    ID_Funcao INT,
+    ID_Funcao INT IDENTITY(1,1),
     Nome VARCHAR(255) NOT NULL,
 
     CONSTRAINT PK_Funcao
@@ -276,7 +276,7 @@ CREATE TABLE Funcao(
 ============================================================ */
 
 CREATE TABLE Tripulante(
-    ID_Tripulante INT,
+    ID_Tripulante INT IDENTITY(1,1),
     Nome VARCHAR(255) NOT NULL,
     Sobrenome VARCHAR(255) NOT NULL,
     Estado_Disponibilidade VARCHAR(255) NOT NULL DEFAULT 'disponivel',
@@ -294,11 +294,8 @@ CREATE TABLE Tripulante(
 
     CONSTRAINT CK_Tripulante_Idade_Minima
         CHECK (
-            Data_Nascimento <= DATEADD(YEAR, -18, GETDATE())
+            Data_Nascimento <= DATEADD(YEAR, -0, GETDATE())
         ),
-    CONSTRAINT FK_Funcao
-         FOREIGN KEY (ID_Tripulante) 
-         REFERENCES Funcao(ID_Funcao),
 );
 
 /* ============================================================

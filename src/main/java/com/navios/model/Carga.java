@@ -26,4 +26,9 @@ public class Carga {
     public float getPeso()         { return peso; }
     public int getPortoCarga()     { return portoCarga; }
     public int getPortoDescarga()  { return portoDescarga; }
+
+    @Override
+    public String toString() {
+        return designacao;
+    }
 }

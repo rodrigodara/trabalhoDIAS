@@ -1,10 +1,11 @@
 package com.navios.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import com.navios.DB.NavioDAO;
+import com.navios.DB.TipoNavioDAO;
 import com.navios.model.Navio;
+import com.navios.model.TipoNavio;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,6 +19,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -107,8 +110,21 @@ public class NavioController {
         TextField txtIMO       = new TextField(navio.getIdentificadorIMO());
         TextField txtBandeira  = new TextField(navio.getBandeira());
         TextField txtAno       = new TextField(String.valueOf(navio.getAnoFabrico()));
+        ComboBox<TipoNavio> cbTipo = new ComboBox<>(FXCollections.observableArrayList(
+            new TipoNavioDAO().listarTipos()
+        ));
+        cbTipo.getItems().stream()
+            .filter(tipo -> tipo.getIdTipoNavio() == navio.getTipo())
+            .findFirst()
+            .ifPresent(cbTipo::setValue);
+        Spinner<Integer> spCompartimentos = new Spinner<>();
+        spCompartimentos.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 999, navio.getNCompartimentos()));
+        spCompartimentos.setEditable(true);
+        Spinner<Integer> spMaxCargas = new Spinner<>();
+        spMaxCargas.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 9999, navio.getNMaximoCargas()));
+        spMaxCargas.setEditable(true);
         ComboBox<String> cbEstado = new ComboBox<>();
-        cbEstado.getItems().addAll("ativo", "inativo");
+        cbEstado.getItems().addAll("ativo", "em manutenção", "inativo");
         cbEstado.setValue(navio.getEstadoOperacional());
 
         GridPane grid = new GridPane();
@@ -118,22 +134,28 @@ public class NavioController {
         grid.addRow(1, new Label("IMO:"),      txtIMO);
         grid.addRow(2, new Label("Bandeira:"), txtBandeira);
         grid.addRow(3, new Label("Ano:"),      txtAno);
-        grid.addRow(4, new Label("Estado:"),   cbEstado);
+        grid.addRow(4, new Label("Tipo:"),     cbTipo);
+        grid.addRow(5, new Label("Compartimentos:"), spCompartimentos);
+        grid.addRow(6, new Label("Max. cargas:"), spMaxCargas);
+        grid.addRow(7, new Label("Estado:"),   cbEstado);
         dialog.getDialogPane().setContent(grid);
 
         dialog.getDialogPane().getButtonTypes()
               .addAll(ButtonType.OK, ButtonType.CANCEL);
 
-        dialog.setResultConverter(btn -> {
+       dialog.setResultConverter(btn -> {
             if (btn == ButtonType.OK) {
                 navio.setNome(txtNome.getText());
                 navio.setIdentificadorIMO(txtIMO.getText());
+                navio.setTipo(cbTipo.getValue().getIdTipoNavio());
+                navio.setNCompartimentos(spCompartimentos.getValue());
+                navio.setNMaximoCargas(spMaxCargas.getValue());
                 navio.setBandeira(txtBandeira.getText());
                 navio.setAnoFabrico(Integer.parseInt(txtAno.getText()));
                 navio.setEstadoOperacional(cbEstado.getValue());
 
-                dao.atualizarNavio(navio);    // ← UPDATE na BD
-                tabelaNavios.refresh();        // ← Atualiza a tabela
+                dao.atualizarNavio(navio);
+                carregarNavios(); // ← em vez de tabelaNavios.refresh()
             }
             return null;
         });
@@ -143,8 +165,6 @@ public class NavioController {
 
     // ─── Métodos existentes ───────────────────────────────────────────────
     private void carregarNavios() {
-        List<Navio> navios = dao.listarNavios();
-        tabelaNavios.getItems().setAll(navios);
         listaNavios.setAll(dao.listarNavios());
     }
 
