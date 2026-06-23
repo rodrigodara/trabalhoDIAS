@@ -123,6 +123,16 @@
                         <Label text="* Nao pode exceder o maximo do Tipo" style="-fx-font-size: 11px; -fx-text-fill: #9CA3AF;"/>
                     </VBox>
                 </HBox>
+                <HBox spacing="16">
+                    <VBox spacing="6" HBox.hgrow="ALWAYS">
+                        <Label text="Capacidade de Carga (ton)"
+                            style="-fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: #6B7280; -fx-padding: 0 0 0 2;"/>
+                        <TextField fx:id="capacidadeCargaField" promptText="Ex: 50000"
+                                style="-fx-background-color: #F8F9FB; -fx-border-color: #D1D5DB; -fx-border-radius: 8; -fx-background-radius: 8; -fx-padding: 10 14 10 14; -fx-font-size: 14px;"/>
+                        <Label text="* Peso maximo total das cargas em toneladas"
+                            style="-fx-font-size: 11px; -fx-text-fill: #9CA3AF;"/>
+                    </VBox>
+                </HBox>
 
                 <Label fx:id="erroLabel" text="" wrapText="true" visible="false" managed="false"
                        style="-fx-background-color: #FEF2F2; -fx-text-fill: #DC2626; -fx-font-size: 13px; -fx-padding: 10 14 10 14; -fx-background-radius: 8; -fx-border-color: #FECACA; -fx-border-radius: 8;"/>

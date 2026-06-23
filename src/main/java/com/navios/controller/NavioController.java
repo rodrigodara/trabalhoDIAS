@@ -34,6 +34,7 @@ public class NavioController {
     
     private ObservableList<Navio> listaNavios;
 
+    @FXML private TableColumn<Navio, Double> colCapacidade;
     @FXML private TableView<Navio> tabelaNavios;
     @FXML private TableColumn<Navio, Integer> colId;
     @FXML private TableColumn<Navio, String>  colNome;
@@ -54,7 +55,8 @@ public class NavioController {
     public void initialize() {
         List<TipoNavio> tiposNavio = new TipoNavioDAO().listarTipos();        
         colTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-        colTipo.setCellFactory(col -> new TableCell<>() {
+        colCapacidade.setCellValueFactory(new PropertyValueFactory<>("capacidadeCarga"));
+            colTipo.setCellFactory(col -> new TableCell<>() {
             @Override
             protected void updateItem(Integer id, boolean empty) {
                 super.updateItem(id, empty);
@@ -129,6 +131,7 @@ public class NavioController {
         dialog.setTitle("Editar Navio");
 
         // Campos com os valores atuais do navio
+        TextField txtCapacidade = new TextField(String.valueOf(navio.getCapacidadeCarga()));
         TextField txtNome      = new TextField(navio.getNome());
         TextField txtIMO       = new TextField(navio.getIdentificadorIMO());
         TextField txtBandeira  = new TextField(navio.getBandeira());
@@ -160,7 +163,8 @@ public class NavioController {
         grid.addRow(4, new Label("Tipo:"),     cbTipo);
         grid.addRow(5, new Label("Compartimentos:"), spCompartimentos);
         grid.addRow(6, new Label("Max. cargas:"), spMaxCargas);
-        grid.addRow(7, new Label("Estado:"),   cbEstado);
+        grid.addRow(7, new Label("Capacidade (ton):"), txtCapacidade);
+        grid.addRow(8, new Label("Estado:"),cbEstado);
         dialog.getDialogPane().setContent(grid);
 
         dialog.getDialogPane().getButtonTypes()
@@ -176,6 +180,7 @@ public class NavioController {
                 navio.setBandeira(txtBandeira.getText());
                 navio.setAnoFabrico(Integer.parseInt(txtAno.getText()));
                 navio.setEstadoOperacional(cbEstado.getValue());
+                navio.setCapacidadeCarga(Double.parseDouble(txtCapacidade.getText()));
 
                 dao.atualizarNavio(navio);
                 carregarNavios(); // ← em vez de tabelaNavios.refresh()

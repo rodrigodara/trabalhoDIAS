@@ -34,15 +34,14 @@
    1. TIPO_NAVIO
    Sem dependências.
 ============================================================ */
-INSERT INTO Tipo_Navio (Nome, N_Maximo_Cargas) VALUES
-('Petroleiro de crude', 200),
-('Produtos refinados', 180),
-('Químico',            120),
-('Químico/produtos',   150),
-('Porta-Contentores', 250),
-('Graneleiro',         200),
-('Ro-Ro',              100);
-
+INSERT INTO Tipo_Navio (Nome, N_Maximo_Cargas, Capacidade_Carga) VALUES
+('Petroleiro de crude', 200, 50000.0),
+('Produtos refinados', 180, 45000.0),
+('Químico',            120, 30000.0),
+('Químico/produtos',   150, 35000.0),
+('Porta-Contentores', 250, 60000.0),
+('Graneleiro',         200, 55000.0),
+('Ro-Ro',              100, 20000.0);
 
 /* ============================================================
    2. PORTO

@@ -14,7 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 public class AdicionarNavioController {
-
+    @FXML private TextField capacidadeCargaField;  
     @FXML private TextField nomeNavioField;
     @FXML private TextField identificadorImoField;
     @FXML private TextField bandeiraField;
@@ -62,18 +62,27 @@ public class AdicionarNavioController {
             mostrarErro("Por favor seleciona o estado do navio.");
             return;
         }
+        if (capacidadeCargaField.getText().isBlank()) {
+            mostrarErro("O campo 'Capacidade de Carga' é obrigatório.");
+            return;
+        }
 
         try {
             // Tipo é int na BD — usa o índice selecionado + 1
             int tipo = tipoNavioCombo.getValue().getIdTipoNavio();
-
-            Navio navio = new Navio(
+            double capacidade = Double.parseDouble(capacidadeCargaField.getText().trim());
+            if (capacidade <= 0) {
+                mostrarErro("A capacidade de carga tem de ser maior que 0.");
+                return; 
+            }
+            Navio navio = new Navio(    
                 0,
                 nomeNavioField.getText().trim(),
                 identificadorImoField.getText().trim(),
                 tipo,
                 compartimentosSpinner.getValue(),
                 maxCargasSpinner.getValue(),
+                capacidade,
                 bandeiraField.getText().trim(),
                 Integer.parseInt(anoFabricoField.getText().trim()),
                 estadoOperacionalCombo.getValue()
@@ -85,7 +94,7 @@ public class AdicionarNavioController {
             stage.close();
 
         } catch (NumberFormatException e) {
-            mostrarErro("O campo 'Ano de Fabrico' tem de ser um número válido.");
+            mostrarErro("Os campos 'Ano de Fabrico' e 'Capacidade de Carga' têm de ser números válidos.");
         }
     }
 

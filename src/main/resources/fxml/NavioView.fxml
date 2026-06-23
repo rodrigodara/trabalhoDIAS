@@ -59,6 +59,7 @@
                 <TableColumn fx:id="colAno"            text="Ano Fabrico" />
                 <TableColumn fx:id="colCompartimentos" text="Compartimentos" />
                 <TableColumn fx:id="colMaxCargas"      text="Max. Cargas" />
+                <TableColumn fx:id="colCapacidade" text="Capacidade (ton)" />
                 <TableColumn fx:id="colEstado"         text="Estado" />
                 <TableColumn fx:id="colAcoes"          text="Ações" />
             </columns>

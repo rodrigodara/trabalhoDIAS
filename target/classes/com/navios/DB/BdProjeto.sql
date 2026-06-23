@@ -6,12 +6,17 @@ CREATE TABLE Tipo_Navio(
     ID_Tipo_Navio int IDENTITY(1,1),
     Nome VARCHAR(255) NOT NULL,
     N_Maximo_Cargas INT NOT NULL,
+    Capacidade_Carga FLOAT NOT NULL,
+
 
     CONSTRAINT PK_Tipo_Navio
         PRIMARY KEY(ID_Tipo_Navio),
 
     CONSTRAINT CK_Tipo_Navio_Max_Cargas
-        CHECK (N_Maximo_Cargas > 0)
+        CHECK (N_Maximo_Cargas > 0),
+
+    CONSTRAINT CK_Navio_Capacidade_Carga
+        CHECK (Capacidade_Carga > 0)
 );
 
 /* ============================================================

@@ -14,11 +14,16 @@ public class NavioDAO {
 
     public List<Navio> listarNavios() {
         List<Navio> navio = new ArrayList<>();
-        String sql = "SELECT * FROM Navio";
+        // JOIN com Tipo_Navio para obter Capacidade_Carga
+        String sql = """
+            SELECT n.*, tn.Capacidade_Carga
+            FROM Navio n
+            JOIN Tipo_Navio tn ON n.Tipo = tn.ID_Tipo_Navio
+        """;
 
         try (Connection conn = LigacaoDB.getConnection();
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql)) {
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
                 navio.add(new Navio(
@@ -26,8 +31,9 @@ public class NavioDAO {
                     rs.getString("Nome"),
                     rs.getString("IdentificadorIMO"),
                     rs.getInt("Tipo"),
-                    rs.getInt("N_Compartimentos"),       
+                    rs.getInt("N_Compartimentos"),
                     rs.getInt("N_Maximo_Cargas"),
+                    rs.getDouble("Capacidade_Carga"),  // vem do JOIN
                     rs.getString("Bandeira"),
                     rs.getInt("Ano_Fabrico"),
                     rs.getString("Estado_Operacional")
@@ -38,12 +44,17 @@ public class NavioDAO {
         }
         return navio;
     }
-    
+
     public void inserirNavio(Navio navio) {
-        String sql = "INSERT INTO Navio (Nome, IdentificadorIMO, Tipo, N_Compartimentos, N_Maximo_Cargas, Bandeira, Ano_Fabrico, Estado_Operacional) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        // Capacidade_Carga NÃO é coluna de Navio — removida
+        String sql = """
+            INSERT INTO Navio 
+                (Nome, IdentificadorIMO, Tipo, N_Compartimentos, N_Maximo_Cargas, Bandeira, Ano_Fabrico, Estado_Operacional)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+        """;
 
         try (Connection conn = LigacaoDB.getConnection();
-            PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, navio.getNome());
             pstmt.setString(2, navio.getIdentificadorIMO());
@@ -61,31 +72,31 @@ public class NavioDAO {
     }
 
     public void atualizarNavio(Navio navio) {
+        // Capacidade_Carga NÃO é coluna de Navio — removida
         String sql = """
-            UPDATE navio    
-            SET nome = ?, IdentificadorIMO = ?, Tipo = ?,
+            UPDATE Navio
+            SET Nome = ?, IdentificadorIMO = ?, Tipo = ?,
                 N_Compartimentos = ?, N_Maximo_Cargas = ?, Bandeira = ?,
                 Ano_Fabrico = ?, Estado_Operacional = ?
-            WHERE id_navio = ?
+            WHERE ID_Navio = ?
         """;
 
         try (Connection conn = LigacaoDB.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, navio.getNome());
             stmt.setString(2, navio.getIdentificadorIMO());
-            stmt.setInt(3,    navio.getTipo());
-            stmt.setInt(4,    navio.getNCompartimentos());
-            stmt.setInt(5,    navio.getNMaximoCargas());
+            stmt.setInt   (3, navio.getTipo());
+            stmt.setInt   (4, navio.getNCompartimentos());
+            stmt.setInt   (5, navio.getNMaximoCargas());
             stmt.setString(6, navio.getBandeira());
-            stmt.setInt(7,    navio.getAnoFabrico());
+            stmt.setInt   (7, navio.getAnoFabrico());
             stmt.setString(8, navio.getEstadoOperacional());
-            stmt.setInt(9,    navio.getIdNavio());
+            stmt.setInt   (9, navio.getIdNavio());
 
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-}
+    }
 }
