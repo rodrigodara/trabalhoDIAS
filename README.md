@@ -1,4 +1,1 @@
 ﻿# trabalhoDIAS
-
-Shau shau shau
-Conheces o P? que P? o peeenta
